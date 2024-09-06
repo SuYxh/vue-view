@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "pnpm run --filter ./play dev",
-    "build": "gulp -f packages/components/script/build/index.ts & pnpm run --filter ./packages/utils build",
-    "publish": "gulp -f packages/components/script/publish/index.ts",
+    "dev": "pnpm run --filter ./playground dev",
+    "build": "gulp -f packages/vueView/script/build/index.ts & pnpm run --filter ./packages/utils build",
+    "publish": "gulp -f packages/vueView/script/publish/index.ts",
     "publish:utils": "gulp -f packages/utils/publish/index.ts",
     "docs:dev": "pnpm run --filter site docs:dev",
     "docs:build": "pnpm run --filter site docs:build",
