@@ -2,6 +2,8 @@ import { series, parallel, src, dest } from 'gulp';
 import { deleteFileByPath, componentPath, runCommand } from '../utils';
 // @ts-ignore
 import jsonModify from 'gulp-json-modify';
+import less from 'gulp-less';
+import autoprefixer from 'gulp-autoprefixer';
 import fs from 'fs';
 import path from 'path';
 
@@ -13,7 +15,21 @@ export const removeDist = () => {
 
 // 打包组件
 export const buildComponent = async () => {
-  runCommand('pnpm run build', componentPath);
+  return runCommand('pnpm run build', componentPath).then(res => {
+    console.log('打包组件 over')
+  }).catch(err => {
+    console.log('打包组件 error', err)
+  })
+};
+
+//打包样式
+export const buildStyle = () => {
+  return src(`${componentPath}/src/**/style/**.less`)
+    .pipe(less())
+    .pipe(autoprefixer())
+    .pipe(dest(`${componentPath}/dist/lib/src`))
+    .pipe(dest(`${componentPath}/dist/es/src`))
+    .on('end', () => console.log('Style build completed'));
 };
 
 export const copyReadme = async () => {
@@ -39,9 +55,10 @@ export const copyAndModifyPackageJson = async () => {
 
 export default series(
   async () => removeDist(),
+  async () => buildComponent(),
+  async () => buildStyle(),
   parallel(
-    async () => buildComponent()
-  ),
-  async () => copyAndModifyPackageJson(),
-  async () => copyReadme()
+    async () => copyAndModifyPackageJson(),
+    async () => copyReadme()
+  )
 );
