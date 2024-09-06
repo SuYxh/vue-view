@@ -1,6 +1,16 @@
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { resolve } from 'path';
+
+const getESDir = () => {
+  return resolve(__dirname, './dist/es');
+};
+
+const getLibDir = () => {
+  return resolve(__dirname, './dist/lib');
+};
+
+
 export default defineConfig({
   build: {
     //压缩
@@ -15,7 +25,7 @@ export default defineConfig({
           //让打包目录和我们目录对应
           preserveModules: true,
           //配置打包根目录
-          dir: resolve(__dirname, './dist/es')
+          dir: getESDir()
         },
         {
           format: 'cjs',
@@ -24,7 +34,7 @@ export default defineConfig({
           //让打包目录和我们目录对应
           preserveModules: true,
           //配置打包根目录
-          dir: resolve(__dirname, './dist/lib')
+          dir: getLibDir()
         }
       ]
     },
@@ -36,9 +46,10 @@ export default defineConfig({
 
   plugins: [
     dts({
+      entryRoot: 'src',
       outputDir: [
-        resolve(__dirname, './dist/es'),
-        resolve(__dirname, './dist/lib')
+        getESDir(),
+        getLibDir()
       ],
       tsConfigFilePath: '../../tsconfig.json'
     })

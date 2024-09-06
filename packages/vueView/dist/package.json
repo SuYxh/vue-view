@@ -21,7 +21,7 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
-    "@yangxinhao/vue-view-utils": "workspace:^1.0.0"
+    "@yangxinhao/vue-view-utils": "^1.0.0"
   },
   "publishConfig": {
     "access": "public"
