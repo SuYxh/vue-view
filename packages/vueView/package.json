@@ -1,0 +1,31 @@
+{
+  "name": "@yangxinhao/vue-view",
+  "version": "1.0.0",
+  "author": "baiyu",
+  "description": "vue-view",
+  "keywords": [
+    "vue-view"
+  ],
+  "files": [
+    "es",
+    "lib"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "lib/index.js",
+  "module": "es/index.mjs",
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@yangxinhao/vue-view-utils": "workspace:^1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "ISC"
+}
